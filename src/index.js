@@ -6,11 +6,11 @@ module.exports = function toReadable (number) {
     var ed_num=["","one","two","three","four","five","six","seven","eight","nine"]
     var co="";
   if(number>99) {
-  co=ed_num[Math.floor(number/100)]+" hundred "
+  co=ed_num[Math.floor(number/100)]+" hundred"
   }
   number=number+"";
-  if(number.length>1&&number.charAt(1)=="1"){
-  var numb = number.charAt(number.length-1)+number.charAt(number.length-2)
+  if(number.length>1&&number.charAt(number.length-2)==="1"){
+  var numb =number.charAt(number.length-2)+number.charAt(number.length-1)
     switch (numb){
             case "10":
                 numb="ten"
@@ -42,6 +42,10 @@ module.exports = function toReadable (number) {
             case "19":
             numb= "nineteen"
             break; 
+    }
+    if(number.length==3){
+        return co+" "+numb;
+        return
     }
     return co+numb;
     return
@@ -79,12 +83,16 @@ module.exports = function toReadable (number) {
         de="twenty"
         break;
         case "0":
-        de=""
+        de=''
         break;
 }
-if(number.charAt(number.lenght-1)=="0"){
-   return co+de+ed;
+if(number.charAt(number.lenght-1)==="0"){
+   return (co+de).trim();
    return;
 }
-return co+de+" "+ed;
+if(de==''){
+    return (co+" "+ed).trim()
+    return;
+ }
+return (co+" "+de+" "+ed).trim();
 }
